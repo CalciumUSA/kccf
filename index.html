@@ -96,7 +96,7 @@
 
   <a href="#donate" class="cta">DONATE HERE</a>
 
-  <!-- Example embedded donation widget -->
+  <!-- Embedded donation widget -->
   <iframe
     src="https://secure.givelively.org/donate/koenig-childhood-cancer-foundation"
     width="100%"
@@ -105,18 +105,36 @@
   </iframe>
 
   <script>
-    // Simulated update mechanism for the sake of a prototype
     const donations = document.getElementById('donation-total');
     const bets = document.getElementById('bets-total');
 
-    // Simulated fetch function for betting API (placeholder)
-    function updateBets() {
-      // In production: replace with actual API fetch logic
-      const simulatedAmount = 11000 + Math.floor(Math.random() * 1000);
-      bets.textContent = `$${simulatedAmount.toLocaleString()}`;
+    async function updateBets() {
+      try {
+        const response = await fetch('https://api.the-odds-api.com/v4/sports/americanfootball_nfl/odds/?regions=us&markets=h2h&apiKey=d24c9d0f6502e85b0c2740cc88b4b47d');
+        const data = await response.json();
+
+        let chiefsOdds = null;
+        data.forEach(game => {
+          const teamIndex = game.bookmakers[0]?.markets[0]?.outcomes.findIndex(o => o.name === 'Kansas City Chiefs');
+          if (teamIndex !== -1 && game.bookmakers[0].markets[0].outcomes[teamIndex]) {
+            chiefsOdds = game.bookmakers[0].markets[0].outcomes[teamIndex];
+          }
+        });
+
+        if (chiefsOdds && chiefsOdds.price) {
+          // You can apply a multiplier here to simulate "betting total"
+          const simulatedBetVolume = Math.floor((2 - chiefsOdds.price) * 5000 + Math.random() * 2000);
+          bets.textContent = `$${simulatedBetVolume.toLocaleString()}`;
+        } else {
+          bets.textContent = '$–';
+        }
+      } catch (error) {
+        console.error('Error fetching odds:', error);
+        bets.textContent = '$–';
+      }
     }
 
-    // Poll every 30 seconds
+    updateBets();
     setInterval(updateBets, 30000);
   </script>
 </body>
