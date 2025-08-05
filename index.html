@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KCCF vs. KCCF</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Orbitron', sans-serif;
+      background: linear-gradient(to right, #f7b733, #fc4a1a);
+      color: #fff;
+      text-align: center;
+    }
+    header {
+      background-color: #222;
+      padding: 1rem;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 1.75rem;
+    }
+    .scoreboard {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      padding: 2rem;
+      background: #111;
+    }
+    .scorebox {
+      flex: 1;
+      padding: 2rem;
+      border-radius: 10px;
+    }
+    .donations {
+      background-color: #fbc531;
+      color: #222;
+    }
+    .bets {
+      background-color: #c23616;
+    }
+    .score {
+      font-size: 3rem;
+      margin: 1rem 0;
+    }
+    .label {
+      font-size: 1.2rem;
+      letter-spacing: 1px;
+    }
+    .game-status {
+      margin-top: 2rem;
+      font-size: 1.25rem;
+      background-color: #222;
+      padding: 1rem;
+      display: inline-block;
+      border-radius: 8px;
+    }
+    .cta {
+      margin-top: 2rem;
+      background: #8e44ad;
+      color: #fff;
+      padding: 1rem 2rem;
+      border: none;
+      font-size: 1.2rem;
+      cursor: pointer;
+      border-radius: 8px;
+      text-decoration: none;
+    }
+    iframe {
+      margin-top: 2rem;
+      border: none;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>KCCF vs. KCCF</h1>
+  </header>
+  <section class="scoreboard">
+    <div class="scorebox donations">
+      <h2>Koenig Childhood Cancer Foundation</h2>
+      <div class="score" id="donation-total">$12,563</div>
+      <div class="label">DONATIONS</div>
+    </div>
+    <div class="scorebox bets">
+      <h2>Kansas City Chiefs Football</h2>
+      <div class="score" id="bets-total">$11,684</div>
+      <div class="label">BETS</div>
+    </div>
+  </section>
+
+  <div class="game-status">
+    2ND QUARTER · 12:35 · 3RD &amp; 5
+  </div>
+
+  <a href="#donate" class="cta">DONATE HERE</a>
+
+  <!-- Example embedded donation widget -->
+  <iframe
+    src="https://secure.givelively.org/donate/koenig-childhood-cancer-foundation"
+    width="100%"
+    height="600"
+    title="Donation Widget">
+  </iframe>
+
+  <script>
+    // Simulated update mechanism for the sake of a prototype
+    const donations = document.getElementById('donation-total');
+    const bets = document.getElementById('bets-total');
+
+    // Simulated fetch function for betting API (placeholder)
+    function updateBets() {
+      // In production: replace with actual API fetch logic
+      const simulatedAmount = 11000 + Math.floor(Math.random() * 1000);
+      bets.textContent = `$${simulatedAmount.toLocaleString()}`;
+    }
+
+    // Poll every 30 seconds
+    setInterval(updateBets, 30000);
+  </script>
+</body>
+</html>
